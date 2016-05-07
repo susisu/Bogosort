@@ -47,8 +47,8 @@ function out(x) {
 }
 
 function main() {
-    const N = Math.abs(parseInt(process.argv[2]) | 0);
-    const M = Math.abs(parseInt(process.argv[3]) | 0);
+    const N = Math.abs(parseInt(process.argv[2]) || 0);
+    const M = Math.abs(parseInt(process.argv[3]) || 0);
     out("# Bogosort");
     out("## N = " + N.toString());
     out("## M = " + M.toString());

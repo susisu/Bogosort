@@ -101,10 +101,10 @@ function out(x) {
 }
 
 function main() {
-    const N       = Math.abs(parseInt(process.argv[2]) | 0);
-    const M       = Math.abs(parseInt(process.argv[3]) | 0);
-    const EPSILON = parseFloat(process.argv[4]) | 0;
-    const BETA    = parseFloat(process.argv[5]) | 0;
+    const N       = Math.abs(parseInt(process.argv[2]) || 0);
+    const M       = Math.abs(parseInt(process.argv[3]) || 0);
+    const EPSILON = parseFloat(process.argv[4]) || 0;
+    const BETA    = parseFloat(process.argv[5]) || 0;
     out("# Bakasort");
     out("## N = " + N.toString());
     out("## M = " + M.toString());
