@@ -64,7 +64,7 @@ function swap(arr, i, j) {
     arr[j]   = temp;
 }
 
-// try to swap randomly two elements in the array
+// tries to swap randomly two elements in the array
 function trySwap(eps, beta, arr) {
     let len = arr.length;
     let i   = Math.floor(Math.random() * len);
@@ -75,12 +75,17 @@ function trySwap(eps, beta, arr) {
     let deltaE = deltaEnergy(eps, arr, i, j);
     if (deltaE < 0) {
         swap(arr, i, j);
+        return true;
     }
     else {
         let p = Math.exp(-beta * deltaE);
         let r = Math.random();
-        if (p > 0 && r <= p) {
+        if (r < p) {
             swap(arr, i, j);
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }
@@ -88,12 +93,15 @@ function trySwap(eps, beta, arr) {
 function sort(eps, beta, n) {
     let arr = new Array(n).fill(0).map((_, i) => i);
     shuffle(arr);
-    let count = 0;
+    let tryCount  = 0;
+    let swapCount = 0;
     while (!test(arr)) {
-        trySwap(eps, beta, arr);
-        count += 1;
+        if (trySwap(eps, beta, arr)) {
+            swapCount += 1;
+        }
+        tryCount += 1;
     }
-    return count;
+    return [tryCount, swapCount];
 }
 
 function out(x) {
@@ -110,17 +118,25 @@ function main() {
     out("## M = " + M.toString());
     out("## EPSILON = " + EPSILON.toString());
     out("## BETA = " + BETA.toString());
-    let sum   = 0;
-    let sumSq = 0;
+    let trySum    = 0;
+    let trySumSq  = 0;
+    let swapSum   = 0;
+    let swapSumSq = 0;
     for (let i = 0; i < M; i++) {
-        let count = sort(EPSILON, BETA, N);
-        sum   += count;
-        sumSq += count * count;
+        let counts = sort(EPSILON, BETA, N);
+        trySum    += counts[0];
+        trySumSq  += counts[0] * counts[0];
+        swapSum   += counts[1];
+        swapSumSq += counts[1] * counts[1];
     }
-    let avg    = sum / M;
-    let stddev = Math.sqrt((sumSq - sum * sum / M) / (M - 1));
-    out("## AVG = " + avg.toString());
-    out("## STDDEV = " + stddev.toString());
+    let tryAvg     = trySum / M;
+    let tryStddev  = Math.sqrt((trySumSq - trySum * trySum / M) / (M - 1));
+    let swapAvg    = swapSum / M;
+    let swapStddev = Math.sqrt((swapSumSq - swapSum * swapSum / M) / (M - 1));
+    out("## TRY_AVG = " + tryAvg.toString());
+    out("## TRY_STDDEV = " + tryStddev.toString());
+    out("## SWAP_AVG = " + swapAvg.toString());
+    out("## SWAP_STDDEV = " + swapStddev.toString());
 }
 
 main();
