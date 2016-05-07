@@ -106,10 +106,10 @@ function main() {
     const EPSILON = parseFloat(process.argv[4]) | 0;
     const BETA    = parseFloat(process.argv[5]) | 0;
     out("# Bakasort");
-    out("# N = " + N.toString());
-    out("# M = " + M.toString());
-    out("# EPSILON = " + EPSILON.toString());
-    out("# BETA = " + BETA.toString());
+    out("## N = " + N.toString());
+    out("## M = " + M.toString());
+    out("## EPSILON = " + EPSILON.toString());
+    out("## BETA = " + BETA.toString());
     let sum   = 0;
     let sumSq = 0;
     for (let i = 0; i < M; i++) {
@@ -119,8 +119,8 @@ function main() {
     }
     let avg    = sum / M;
     let stddev = Math.sqrt((sumSq - sum * sum / M) / (M - 1));
-    out("# avg = " + avg.toString());
-    out("# stddev = " + stddev.toString());
+    out("## AVG = " + avg.toString());
+    out("## STDDEV = " + stddev.toString());
 }
 
 main();

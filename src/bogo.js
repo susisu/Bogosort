@@ -50,8 +50,8 @@ function main() {
     const N = Math.abs(parseInt(process.argv[2]) | 0);
     const M = Math.abs(parseInt(process.argv[3]) | 0);
     out("# Bogosort");
-    out("# N = " + N.toString());
-    out("# M = " + M.toString());
+    out("## N = " + N.toString());
+    out("## M = " + M.toString());
     let sum   = 0;
     let sumSq = 0;
     for (let i = 0; i < M; i++) {
@@ -61,8 +61,8 @@ function main() {
     }
     let avg    = sum / M;
     let stddev = Math.sqrt((sumSq - sum * sum / M) / (M - 1));
-    out("# avg = " + avg.toString());
-    out("# stddev = " + stddev.toString());
+    out("## AVG = " + avg.toString());
+    out("## STDDEV = " + stddev.toString());
 }
 
 main();
